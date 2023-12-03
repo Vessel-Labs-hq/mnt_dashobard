@@ -38,9 +38,14 @@ const SignUpForm = () => {
       );
       if (res && res.ok) {
         toast.success("Sign up successful");
-
         router.push(`/auth/verify?email=${email}`);
       }
+      else {
+        res.json().then(data => {
+          toast.error(data.message);
+        });
+      }
+
     } catch (error) {
       /**
        * TODO toast error message for users feedback
